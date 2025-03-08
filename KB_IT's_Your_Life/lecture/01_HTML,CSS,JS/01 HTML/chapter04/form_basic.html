@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <!-- 사용자가 입력하는 입력 양식 -->
+      <input type="text" name="text" value="text" /><br />
+      <input type="password" name="password" value="password" /><br />
+      <input type="file" name="file" /><br />
+      <!-- checkbox와 radio는 선택을 하지 않으면 Request에 아예 포함되지 않음(정보를 안 보냄) -->
+      <input type="checkbox" name="checkbox" value="checkbox" /><br />
+      <input type="radio" name="radio" value="radio" /><br />
+
+      <!-- 보이지 않는 입력 양식 -->
+      <input type="hidden" name="hidden" value="hidden" /><br />
+
+      <!-- 버튼 -->
+      <input type="button" value="button" /><br />
+      <!-- 타이틀로 글자밖에 못씀 -->
+      <button>체크</button><br />
+      <!-- 이미지 등을 타이틀로 사용할 수 있음. 또한 default로 submit 버튼으로 동작함(type으로 변경 가능) -->
+
+      <input type="reset" value="reset" /><br />
+      <input type="submit" value="submit" /><br />
+      <input type="image" src="https://placehold.co/100x100" />
+    </form>
+  </body>
+</html>

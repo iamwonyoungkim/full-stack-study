@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CSS3 Position Property</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        /* 기본 설정은 static으로 돼있음 */
+        position: absolute;
+      }
+      .box:nth-child(1) {
+        background-color: red;
+        left: 10px;
+        top: 10px;
+      }
+      .box:nth-child(2) {
+        background-color: green;
+        left: 50px;
+        top: 50px;
+      }
+      .box:nth-child(3) {
+        background-color: blue;
+        left: 90px;
+        top: 90px;
+      }
+      #container {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    Hello
+    <!-- Hello랑 겹치지 않게 하기 위해 부모 div 태그를 생성한 후
+     부모의 position 속성을 relative로 설정. -->
+    <div id="container">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+  </body>
+</html>

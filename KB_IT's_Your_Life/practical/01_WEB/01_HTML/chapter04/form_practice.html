@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" method="get" enctype="multipart/form-data">
+      <h3>텍스트 입력창</h3>
+      이름 : <input type="text" name="name" />
+      <hr />
+      <h3>비밀번호 입력 창</h3>
+      비밀번호 : <input type="password" />
+      <hr />
+      <h3>라디오버튼</h3>
+      <!-- 라디오 버튼은 name을 같게 해줘야 함 -->
+      이메일 수신: <input type="radio" name="email" />동의함
+      <input type="radio" name="email" checked />동의하지 않음
+      <hr />
+      <h3>체크박스</h3>
+      <!-- 체크박스는 name을 다르게 해줘야 함 -->
+      <p>TV에서 즐겨보는 분야는?</p>
+      <input type="checkbox" name="item1" />뉴스
+      <input type="checkbox" name="item2" />드라마
+      <hr />
+      <h3>선택박스</h3>
+      이메일 : <input type="text" placeholder="아이디" />@
+      <select>
+        <option>naver.com</option>
+        <option>gmail.com</option>
+      </select>
+      <hr />
+      <h3>남기고 싶은 말</h3>
+      <textarea rows="5" cols="80"></textarea>
+      <hr />
+      <h3>파일 업로드</h3>
+      <input type="file" />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Responsive Web Design</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #3c4042;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+      nav {
+        background-color: #e3e6e8;
+        overflow: hidden;
+      }
+      ul {
+        text-align: center;
+      }
+      nav li {
+        display: inline-block;
+        list-style-type: none;
+        padding: 10px;
+      }
+      .gallery {
+        margin: 20px;
+        overflow: hidden;
+        text-align: center;
+      }
+      .card {
+        background-color: white;
+        width: 250px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        display: inline-block;
+        margin: 15px;
+      }
+      .card > img {
+        width: 100%;
+      }
+      .card-content {
+        margin: 20px 15px 15px 15px;
+      }
+      footer {
+        padding: 10px 0;
+        background-color: #3c4042;
+        color: white;
+        text-align: center;
+      }
+      /* smartphone */
+      @media screen and (max-width: 767px) {
+        body {
+          background-color: lightcoral;
+        }
+      }
+      /* tablet */
+      @media screen and (min-width: 768px) and (max-width: 959px) {
+        body {
+          background-color: lightgreen;
+        }
+      }
+      /* desktop */
+      @media screen and (min-width: 960px) {
+        body {
+          background-color: lightblue;
+          width: 960px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>반응형 웹 예제</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#">홈</a></li>
+        <li><a href="#">소개</a></li>
+        <li><a href="#">갤러리</a></li>
+        <li><a href="#">연락처</a></li>
+      </ul>
+    </nav>
+    <main>
+      <section class="gallery">
+        <article class="card">
+          <img src="https://picsum.photos/300/200" alt="랜덤 이미지 1" />
+          <div class="card-content">
+            <h2>카드 제목 1</h2>
+            <p>여기에 카드 내용이 들어갑니다.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://picsum.photos/300/200" alt="랜덤 이미지 2" />
+          <div class="card-content">
+            <h2>카드 제목 2</h2>
+            <p>여기에 카드 내용이 들어갑니다.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://picsum.photos/300/200" alt="랜덤 이미지 3" />
+          <div class="card-content">
+            <h2>카드 제목 3</h2>
+            <p>여기에 카드 내용이 들어갑니다.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+    <footer>
+      <p>© 2025 반응형 웹 예제. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Fixed Bar</title>
+    <style>
+      .container {
+        /* 이 margin들을 설정해주지 않으면 사이드 바에 의해 내용이 가려질 수 있음 */
+        /* 또한 스크롤 시에도 가장 아래에 있는 내용이 가려짐. */
+        margin-bottom: 50px;
+        margin-left: 50px;
+      }
+      .bottom_bar {
+        background: red;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 50px;
+      }
+      .left_bar {
+        background: blue;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 50px;
+        width: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bottom_bar"></div>
+    <div class="left_bar"></div>
+    <div class="container">
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias,
+        molestiae enim debitis vitae temporibus facere ratione, quae saepe nihil
+        natus fugiat adipisci. Facere velit ad adipisci blanditiis doloremque.
+        Quos explicabo, odit iste culpa exercitationem placeat officiis
+        molestias illum ea quaerat, minima nobis. Modi fugiat nulla sapiente
+        animi culpa quasi nobis.
+      </p>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore,
+        tenetur exercitationem! Blanditiis architecto harum quos praesentium
+        dolores quasi officiis expedita earum dicta excepturi, deserunt ratione
+        ipsam cupiditate ea modi, sit maxime sunt nostrum nisi repellendus.
+        Obcaecati, debitis asperiores consequatur ipsum accusantium praesentium
+        modi minus corporis vitae dolor, mollitia quae reiciendis?
+      </p>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum
+        perferendis ipsum officiis maiores tempora in dolore fugit ipsa sed, vel
+        explicabo adipisci provident blanditiis dolorum enim exercitationem,
+        atque distinctio earum fuga commodi magni quo. Perspiciatis, corporis
+        dolores? Sunt laudantium quo animi qui accusamus optio inventore eaque
+        laborum. Beatae veritatis iste doloribus voluptatem in velit at
+        cupiditate blanditiis incidunt cum magnam ad earum, exercitationem
+        molestiae sit reprehenderit aliquam enim minus doloremque?
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias ipsam
+        natus ex mollitia optio a dolores consequatur dolorem, delectus, laborum
+        reiciendis numquam atque voluptate voluptates qui molestiae assumenda
+        nisi aperiam soluta saepe incidunt! Architecto voluptas minima fuga?
+        Quam ut, harum ipsum magnam ullam ad quidem incidunt unde. Voluptatum
+        porro quis est ad deleniti reprehenderit possimus odio, reiciendis
+        suscipit illum repellat! Voluptates asperiores aut cupiditate cum, unde
+        tenetur accusantium deleniti rerum. Sunt corrupti vero maxime modi ipsam
+        debitis id itaque quae velit provident cumque quos similique sed,
+        deserunt voluptatum laudantium ut magni enim consequuntur! Veniam
+        deserunt corporis suscipit laudantium cum itaque?
+      </p>
+    </div>
+  </body>
+</html>

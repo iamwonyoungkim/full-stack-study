@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+  </head>
+  <body>
+    <form action="" method="get">
+      <fieldset>
+        <legend>회원가입</legend>
+        <table>
+          <tr>
+            <th>사용자 ID</th>
+            <td><input type="text" name="id" /></td>
+          </tr>
+          <tr>
+            <th>비밀번호</th>
+            <td><input type="password" name="pw" /></td>
+          </tr>
+          <tr>
+            <th>비밀번호 확인</th>
+            <td><input type="password" name="pwcheck" /></td>
+          </tr>
+          <tr>
+            <th>이름</th>
+            <td><input type="text" name="name" /></td>
+          </tr>
+          <tr>
+            <th>성별</th>
+            <td>
+              <input type="radio" name="sex" />남
+              <input type="radio" name="sex" />여
+            </td>
+          </tr>
+          <tr>
+            <th>취미</th>
+            <td>
+              <input type="checkbox" name="soccer" />축구
+              <input type="checkbox" name="baseball" />야구
+              <input type="checkbox" name="volleyball" />배구
+              <input type="checkbox" name="basketball" />농구
+            </td>
+          </tr>
+          <tr>
+            <th>email</th>
+            <td><input type="email" name="email" /></td>
+          </tr>
+          <tr>
+            <th>역할</th>
+            <td>
+              <select name="role">
+                <option value="admin">ADMIN</option>
+                <option value="manager" selected>관리자</option>
+                <option value="normal">일반회원</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+        <input type="submit" value="확인" />
+        <input type="reset" value="다시쓰기" />
+      </fieldset>
+    </form>
+  </body>
+</html>

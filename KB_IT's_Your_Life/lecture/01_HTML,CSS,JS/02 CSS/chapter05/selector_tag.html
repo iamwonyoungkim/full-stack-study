@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS3 Selector Basic</title>
+    <style>
+      /* 전체 선택자 다음에 나오는 태그 선택자들이 기존 내용에 중첩됨. 따라서 기존의 스타일이 사라지는 것이 아님. */
+      * {
+        color: yellow;
+      }
+      h1 {
+        color: red;
+      }
+      p {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>제목 글자</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+      doloremque possimus reiciendis accusantium saepe voluptatem nulla eius
+      sunt! Atque sint cumque nisi earum cum magnam quasi mollitia consectetur
+      in consequuntur!
+    </p>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam fugit
+      veniam incidunt id. Nobis corrupti incidunt id distinctio soluta inventore
+      consectetur libero facere, quod blanditiis repudiandae dolore a reiciendis
+      consequatur!
+    </p>
+  </body>
+</html>
