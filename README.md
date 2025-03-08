@@ -19,9 +19,3 @@ This is where I document everything I’m learning on my journey to becoming a w
 - Build a strong foundation in web development
 - Work on real-world projects and improve problem-solving skills
 - Become a professional web developer
-
-<-- ## 🚀 Let’s Connect!
-If you’d like to follow my journey or collaborate on a project, feel free to reach out!
-
-- **GitHub:** [Your GitHub Profile Link]
-- **LinkedIn:** [Your LinkedIn Profile Link, if you have one] -->
