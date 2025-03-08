@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS3 Selector Basic</title>
+    <style>
+      /* 구조 선택자 */
+      ul {
+        /* 리스트 다음 또 다른 컨텐츠가 있을 때 줄바꿈을 해주기 위한 스타일 */
+        overflow: hidden;
+      }
+      li {
+        list-style: none;
+        float: left;
+        padding: 15px;
+      }
+      li:first-child {
+        border-radius: 10px 0 0 10px;
+      }
+      li:last-child {
+        border-radius: 0 10px 10px 0;
+      }
+
+      li:nth-child(2n) {
+        background-color: #ff0003;
+      }
+      li:nth-child(2n + 1) {
+        background-color: #800000;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>첫 번째</li>
+      <li>두 번째</li>
+      <li>세 번째</li>
+      <li>네 번째</li>
+      <li>다섯 번째</li>
+      <li>여섯 번째</li>
+      <li>일곱 번째</li>
+    </ul>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos expedita
+      eaque recusandae. Eaque repellendus consectetur laborum minus atque
+      quaerat! Quo eligendi magni tenetur assumenda molestias, beatae obcaecati
+      voluptas blanditiis, minima nisi laboriosam, delectus impedit voluptatum
+      aspernatur ab quibusdam architecto rerum aliquam recusandae ipsam adipisci
+      voluptate? Eos impedit beatae maxime fugit ut, dolores cum! Voluptates
+      voluptas quo in voluptatem eos omnis adipisci, repellendus nam aut aperiam
+      reprehenderit fugit, ipsam debitis nulla consectetur nostrum quia sequi at
+      architecto inventore? Perspiciatis, praesentium sint illum ex atque omnis
+      odio earum sapiente architecto necessitatibus. Omnis rem dolorum dolores
+      temporibus odit tenetur quo, sunt consequuntur possimus. Consectetur,
+      ducimus exercitationem? Aspernatur ut perspiciatis expedita sed iure sit
+      dicta accusamus est fugit architecto officia, fuga cum qui odit
+      reprehenderit voluptatibus, sint quia, aut ex in. Sapiente voluptatibus
+      quos, veritatis accusamus vel alias quod cupiditate maiores qui veniam,
+      ducimus voluptate nam nobis! Autem quisquam quasi consequuntur quod
+      officia animi dignissimos, temporibus nesciunt explicabo recusandae modi
+      vitae minima sapiente? Illum officia est ut corporis obcaecati in ipsam
+      iste vero molestias tempore consequatur ullam maxime eligendi nulla cumque
+      optio dolores cum a voluptatum fugit, qui eaque architecto ex ipsa.
+      Facilis voluptates perferendis odit voluptas ipsum maiores, accusantium
+      corporis obcaecati nesciunt. Tempora?
+    </p>
+  </body>
+</html>

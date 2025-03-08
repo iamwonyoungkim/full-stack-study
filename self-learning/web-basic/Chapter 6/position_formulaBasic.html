@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CSS3 Position Property</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+      }
+      .box:nth-child(1) {
+        background-color: red;
+        left: 10px;
+        top: 10px;
+        z-index: 100;
+      }
+      .box:nth-child(2) {
+        background-color: green;
+        left: 50px;
+        top: 50px;
+        z-index: 10;
+      }
+      .box:nth-child(3) {
+        background-color: blue;
+        left: 90px;
+        top: 90px;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Lorem ipsum dolor amet</h1>
+    <div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+    <h1>Lorem ipsum dolor amet</h1>
+  </body>
+</html>
+
+<!-- 이 코드의 실행 결과의 문제점 -->
+<!-- 1. h1 태그 2개가 붙어 있음(div 태그가 영역을 차지하지 않음) -->
+<!-- 2. 색상이 적용된 상자가 자신의 부모를 기준으로 위치를 잡지 않음 -->
+
+<!-- position 속성에 absolute 키워드를 적용하면 부모 태그가 영역을 차지하지 않음 -->
+<!-- 따라서 자손의 position 속성에 absolute 키워드를 적용할 때는 부모 태그에 몇 가지 처리를 해야 함 -->
+
+<!-- 1번 문제 해결 공식 -->
+<!-- "자손의 position 속성에 absolute 키워드를 적용하려면 부모에 height 속성을 입력합니다." -->
+
+<!-- 2번 문제 해결 공식 -->
+<!-- "자손의 position 속성에 absolute 키워드를 적용하려면 부모의 position 속성에 relative 키워드를 적용합니다." -->
