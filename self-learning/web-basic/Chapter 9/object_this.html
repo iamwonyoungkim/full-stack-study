@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 객체 선언
+      let person = {
+        name: '윤인성',
+        // 객체 속성 중 자료형이 함수인 속성을 메서드라고 함함
+        eat: function (food) {
+          // 객체에 있는 속성을 메서드에서 사용하고 싶을 때는 자신이 가진 속성임을 분명하게 표시해야 함. 이때 this 사용.
+          alert(this.name + '이 ' + food + '을/를 먹습니다.');
+        },
+      };
+
+      // 메서드 호출
+      person.eat('밥');
+    </script>
+  </head>
+  <body></body>
+</html>

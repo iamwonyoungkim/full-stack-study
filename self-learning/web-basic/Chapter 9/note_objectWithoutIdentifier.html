@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 식별자 생성 규칙에 어긋나는 문자를 키로 사용할 때는 반드시 대괄호로 감싸야 객체 요소에 접근할 수 있음.
+      // 대괄호가 아니라 점을 찍어 사용하면 자바스크립트 문법 오류가 발생함.
+
+      // 객체 선언
+      let object = {
+        'with space': 273,
+        'with ~!@#$%^&*()_+': 52,
+      };
+
+      // 출력
+      alert(object['with space']);
+      alert(object['with ~!@#$%^&*()_+']);
+    </script>
+  </head>
+  <body></body>
+</html>
