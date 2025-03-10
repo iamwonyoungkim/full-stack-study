@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Object Model</title>
+    <script>
+      // h1 태그의 배경 색상 변경
+      document.querySelector('h1').style.backgroundColor = 'red';
+      // h2 태그의 글자 색상을 변경
+      document.querySelector('h2').style.color = 'red';
+    </script>
+  </head>
+  <body>
+    <h1>Process - 1</h1>
+    <h2>Process - 2</h2>
+  </body>
+</html>
+<!-- 코드를 실행하면 오류가 발생한다.
+ 이는 웹 브라우저가 위쪽에서 아래쪽으로 코드를 차근차근 실행하기 때문에 script 태그를 읽을 때는 h1 태그와 h2 태그가 생성되어 있지 않아서 발생하는 문제이다. -->

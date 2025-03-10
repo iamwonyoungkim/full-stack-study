@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Object Model</title>
+  </head>
+  <body>
+    <h1>Process - 1</h1>
+    <h2>process - 2</h2>
+    <!-- script 태그를 h1 태그와 h2 태그 아래에 삽입하면 오류가 발생하지 않는다. -->
+    <script>
+      // h1 태그의 배경 색상 변경
+      document.querySelector('h1').style.backgroundColor = 'red';
+      // h2 태그의 글자 색상을 변경
+      document.querySelector('h2').style.color = 'red';
+    </script>
+  </body>
+</html>
