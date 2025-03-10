@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function midNum(fst, snd, trd) {
+        // 매개변수로 받은 3개의 숫자로 배열 만들기
+        let arr = [fst, snd, trd];
+
+        // 오름차순으로 정렬하기
+        arr = arr.sort((a, b) => a - b);
+
+        console.log(arr[1]);
+      }
+
+      midNum(5, 2, 8);
+    </script>
+  </head>
+  <body></body>
+</html>

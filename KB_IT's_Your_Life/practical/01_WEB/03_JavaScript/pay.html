@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function pay(wage, hours) {
+        if (hours > 8) {
+          console.log(wage * 8 + wage * 1.5 * (hours - 8));
+        } else {
+          console.log(wage * 8);
+        }
+      }
+
+      pay(1000, 8);
+    </script>
+  </head>
+  <body></body>
+</html>
