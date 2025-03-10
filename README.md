@@ -6,7 +6,7 @@ This is where I document everything I’m learning on my journey to becoming a w
 ## 📂 Folder Structure
 
 - **`self-study/`** — Projects, notes, and practice from my own independent learning
-- **`bootcamp/`** — Assignments, projects, and exercises from the web development bootcamp
+- **`KB-IT's-Your-Life/`** — Assignments, projects, and exercises from the web development bootcamp
 
 ## 🛠️ Technologies & Tools
 
