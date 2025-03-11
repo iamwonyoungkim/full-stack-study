@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        /* 수평 중앙 정렬 */
+        width: 960px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin: 10px;
+      }
+      #form {
+        width: 940px;
+        margin: 10px;
+      }
+      input {
+        width: 840px;
+        padding: 10px;
+      }
+      .add {
+        width: 70px;
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 10px;
+      }
+      li {
+        display: flex;
+        /* 수직 중앙 정렬렬 */
+        align-items: center;
+        /* 텍스트와 버튼 사이에 공간 확보. 필요하면 버튼을 오른쪽으로 밀 수도 있음. */
+        justify-content: space-between;
+        list-style-type: none;
+        background-color: #e8e8e8;
+        margin: 10px;
+        padding: 20px;
+      }
+      .del {
+        width: 50px;
+        height: 30px;
+        background-color: red;
+        color: white;
+        border: none;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let add = document.querySelector('.add');
+        let todo = document.querySelector('#todo');
+        let list = document.querySelector('#list');
+
+        add.addEventListener('click', function () {
+          if (todo.value != '') {
+            // 새로운 요소 생성
+            let newLi = document.createElement('li');
+            // 새로운 텍스트 노드 생성
+            let newContent = document.createTextNode(todo.value);
+            // 생성한 텍스트 노드를 요소 아래 Child Node로 넣는다.
+            newLi.appendChild(newContent);
+            //innerHTML로 새로운 요소에 button 태그를 넣어준다.
+            newLi.innerHTML += '<button class="del">삭제<\/button>';
+            // ul 태그의 첫번째 자식 이전에 새로운 요소를 추가한다.
+            list.insertBefore(newLi, list.firstChild);
+            // input[type="text"] 태그의 내용을 없애준다(placeholder가 나오도록).
+            todo.value = '';
+          }
+        });
+        // 왜 이벤트를 button이 아닌 ul에 위임하는가?
+        // 이벤트 위임(Event Delegation): 부모 요소에 이벤트 리스너를 설정하고, 자식 요소의 이벤트를 감지하는 방식
+        // 예를 들어, button에 직접 이벤트를 걸면 새로 동적으로 추가된 버튼에는 이벤트가 동작하지 않는다.
+        list.addEventListener('click', function (event) {
+          // event.target이란 이벤트가 발생한 진짜 대상(요소)을 가리킨다.
+          // 즉, 이벤트 핸들러가 달린 요소와 이벤트가 실제로 발생한 요소가 다를 수 있기 때문에,
+          // event.target을 통해 정확한 클릭된 요소를 찾을 수 있다.
+          event.target.parentNode.remove();
+
+          // closest()를 사용해서 특정 부모 요소만 선택하고 싶다면 아래의 방법도 가능하다.
+          // event.target.closest('li').remove(); // 가장 가까운 li 삭제
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <div id="form">
+      <input id="todo" type="text" placeholder="할 일을 입력하세요" />
+      <button class="add">추가</button>
+    </div>
+
+    <ul id="list">
+      <li>일기쓰기<button class="del">삭제</button></li>
+      <li>장보기<button class="del">삭제</button></li>
+      <li>운동가기<button class="del">삭제</button></li>
+      <li>DOM 실습하기<button class="del">삭제</button></li>
+      <li>JavaScript 공부하기<button class="del">삭제</button></li>
+    </ul>
+  </body>
+</html>
