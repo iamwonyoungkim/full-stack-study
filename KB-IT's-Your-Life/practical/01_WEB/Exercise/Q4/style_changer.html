@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        let color = document.querySelector('#color');
+        let size = document.querySelector('#size');
+        let border = document.querySelector('#border');
+        let sizeDisplay = document.querySelector('#sizeDisplay');
+
+        let curColor = document.querySelector('#curColor');
+        let curSize = document.querySelector('#curSize');
+        let curBorder = document.querySelector('#curBorder');
+
+        let set = document.querySelector('#set');
+        let object = document.querySelector('#object');
+
+        sizeDisplay.innerHTML = size.value + 'px';
+        curColor.innerHTML = color.value;
+        curSize.innerHTML = size.value;
+        curBorder.innerHTML = border.value;
+
+        // change 이벤트 대신 input 이벤트를 사용할 수도 있다.
+        set.addEventListener('change', function (event) {
+          object.style.backgroundColor = color.value;
+          object.style.width = size.value + 'px';
+          object.style.height = size.value + 'px';
+          object.style.border = `2px ${border.value} black`;
+
+          curColor.innerHTML = color.value;
+          curSize.innerHTML = size.value;
+          curBorder.innerHTML = border.value;
+        });
+      };
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        width: 600px;
+        margin: 0 auto;
+      }
+      #set {
+        background-color: #e8e8e8;
+        padding: 15px;
+        line-height: 2em;
+      }
+      #sizeDisplay {
+        margin: 10px;
+      }
+      #object {
+        width: 200px;
+        height: 200px;
+        background-color: black;
+        margin: 20px auto;
+      }
+      #current {
+        background-color: #e8e8e8;
+        padding: 15px;
+      }
+      #current > h3 {
+        margin: 15px;
+      }
+      ul {
+        background-color: white;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      li {
+        list-style-type: none;
+        margin: 10px;
+        line-height: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="set">
+      <label for="color">색상:</label>
+      <input type="color" name="" id="color" /><br />
+
+      <label for="size">크기:</label>
+      <input type="range" name="" id="size" min="100" max="500" /><span
+        id="sizeDisplay"
+      ></span
+      ><br />
+
+      <label for="border">테두리 스타일:</label>
+      <select name="" id="border">
+        <option value="solid">solid</option>
+        <option value="dashed">dashed</option>
+        <option value="dotted">dotted</option>
+      </select>
+    </div>
+
+    <div id="object"></div>
+
+    <div id="current">
+      <h3>현재 설정</h3>
+      <ul>
+        <li>색상: <span id="curColor"></span></li>
+        <li>크기: <span id="curSize"></span></li>
+        <li>테두리: <span id="curBorder"></span></li>
+      </ul>
+    </div>
+  </body>
+</html>
