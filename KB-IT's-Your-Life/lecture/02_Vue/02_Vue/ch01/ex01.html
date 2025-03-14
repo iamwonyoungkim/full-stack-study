@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{message}}</h2>
+    </div>
+
+    <!-- CDN 방식으로 Vue 받아오기 -->
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+      let model = { message: 'Hello Vue3!' };
+      let vm = Vue.createApp({
+        name: 'App',
+        // 좁은 의미로 이 부분을 ViewModel로 보기도 한다.
+        data() {
+          return model; // data()의 return 객체가 Vue의 감시 대상이다.
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
