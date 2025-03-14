@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{message}}</h2>
+    </div>
+    <script>
+      let model = { message: 'Hello Vue3!' };
+
+      const app = document.querySelector('#app');
+      const template = app.innerHTML;
+
+      // 프록시 생성
+      const proxy = new Proxy(model, {
+        get(target, property) {
+          return target[property];
+        },
+        set(target, property, value) {
+          target[property] = value;
+          // 여기서 렌더링
+          render(property); // property가 여러 개 있을 때 property를 지정해주면 잘 찾는다.
+          return true;
+        },
+      });
+
+      function render(property) {
+        // <h2>{{message}}</h2>에서 {{message}} -> Hello Vue3!를 해서 <h2>Hello Vue3!<h2>를 만든다.
+        let html = template.replace(`{{${property}}}`, proxy[property]);
+        app.innerHTML = html;
+      }
+
+      render('message');
+
+      setInterval(() => {
+        proxy.message =
+          proxy.message === 'Hello Vue3!' ? '프록시 연습중' : 'Hello Vue3!';
+      }, 2000);
+    </script>
+  </body>
+</html>

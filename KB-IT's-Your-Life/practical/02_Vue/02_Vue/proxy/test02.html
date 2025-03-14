@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{message}}</h2>
+      <input type="text" name="" id="messageInput" />
+      <button onclick="updateMessage()">메시지 변경</button>
+    </div>
+    <script>
+      let model = { message: 'Hello Vue3!' };
+
+      const app = document.querySelector('#app');
+      const template = app.innerHTML;
+
+      // 프록시 생성
+      const proxy = new Proxy(model, {
+        get(target, property) {
+          return target[property];
+        },
+        set(target, property, value) {
+          target[property] = value;
+          render(property);
+          return true;
+        },
+      });
+
+      let input = document.querySelector('#messageInput');
+
+      function updateMessage() {
+        proxy.message = input.value;
+      }
+
+      function render(property) {
+        let html = template.replace(`{{${property}}}`, proxy[property]);
+        app.innerHTML = html;
+      }
+    </script>
+  </body>
+</html>
