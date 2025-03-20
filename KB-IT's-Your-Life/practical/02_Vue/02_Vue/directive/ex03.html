@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .rounded-image {
+        border-radius: 8px;
+        border: 2px solid #ccc;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <img
+        v-bind:class="imageClass"
+        v-bind:src="imageUrl"
+        v-bind:alt="imageAlt"
+      />
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <script>
+      let vm = Vue.createApp({
+        name: 'App',
+        data() {
+          return {
+            imageUrl: 'https://picsum.photos/200/300',
+            imageAlt: '랜덤 이미지',
+            imageClass: 'rounded-image',
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

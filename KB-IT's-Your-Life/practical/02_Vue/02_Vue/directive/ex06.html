@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>관심있는 스포츠 종목 (다중선택 가능)</h4>
+      <input id="soccer" type="checkbox" v-model="sports" value="축구" />
+      <label for="soccer">축구</label>
+      <input id="baseball" type="checkbox" v-model="sports" value="야구" />
+      <label for="baseball">야구</label>
+      <input id="basketball" type="checkbox" v-model="sports" value="농구" />
+      <label for="basketball">농구</label>
+      <input id="volleyball" type="checkbox" v-model="sports" value="배구" />
+      <label for="volleyball">배구</label>
+      <p>선택한 스포츠: {{sports.length > 0 ? sports : '선택사항 없음'}}</p>
+
+      <h4>선호하는 시청 방식 (하나만 선택 가능)</h4>
+      <input id="onsite" type="radio" v-model="watch" value="현장관람" />
+      <label for="onsite">현장관람</label>
+      <input id="tv" type="radio" v-model="watch" value="TV중계" />
+      <label for="tv">TV중계</label>
+      <input id="mobile" type="radio" v-model="watch" value="모바일" />
+      <label for="mobile">모바일</label>
+      <input id="highlight" type="radio" v-model="watch" value="하이라이트" />
+      <label for="highlight">하이라이트</label>
+      <p>선택한 시청 방식: {{watch.length > 0 ? watch : '선택사항 없음'}}</p>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <script>
+      let vm = Vue.createApp({
+        name: 'App',
+        data() {
+          return {
+            sports: [],
+            watch: '',
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

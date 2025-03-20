@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="student in students" :key="student.id">
+          {{student.name}} - {{student.score}}
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+      let vm = Vue.createApp({
+        name: 'App',
+        data() {
+          return {
+            students: [
+              { id: 1, name: '김철수', score: 85 },
+              { id: 2, name: '이영희', score: 92 },
+              { id: 3, name: '박민수', score: 78 },
+            ],
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

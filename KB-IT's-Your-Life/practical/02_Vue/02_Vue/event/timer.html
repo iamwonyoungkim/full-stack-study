@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{formattedTime}}</h3>
+      <button @click="start" :disabled="isRunning">시작</button>
+      <button @click="pause">일시정지</button>
+      <button @click="reset">리셋</button>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <script>
+      let vm = Vue.createApp({
+        name: 'App',
+        data() {
+          return {
+            min: 0,
+            sec: 0,
+            timer: null,
+            isRunning: false,
+          };
+        },
+        computed: {
+          formattedTime() {
+            return `${this.min.toString().padStart(2, '0')}:${this.sec
+              .toString()
+              .padStart(2, '0')}`;
+          },
+        },
+        methods: {
+          start() {
+            if (this.timer) return; // 이미 실행 중이면 중복 실행 방지
+
+            this.isRunning = true;
+            this.timer = setInterval(() => {
+              this.sec++;
+              if (this.sec === 60) {
+                this.sec = 0;
+                this.min++;
+              }
+            }, 1000);
+          },
+          pause() {
+            clearInterval(this.timer);
+            this.timer = null;
+            this.isRunning = false;
+          },
+          reset() {
+            this.pause();
+            this.min = 0;
+            this.sec = 0;
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

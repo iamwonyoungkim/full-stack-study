@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>할일 목록 (완료: {{doneTasks}}개)</h1>
+
+      <ul>
+        <li v-for="task in tasks">
+          <input v-model="task.done" type="checkbox" />{{task.text}}
+        </li>
+      </ul>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <script>
+      let vm = Vue.createApp({
+        name: 'App',
+        data() {
+          return {
+            tasks: [
+              { text: '운동하기', done: false },
+              { text: '공부하기', done: false },
+              { text: '청소하기', done: false },
+            ],
+          };
+        },
+        computed: {
+          doneTasks() {
+            return this.tasks.filter((task) => task.done === true).length;
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
