@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo</title>
+    <!-- fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- bootstrap - css -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- 나의 css 파일 -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .container {
+        padding: 10px;
+      }
+      .card {
+        color: white;
+        position: relative;
+        height: 200px;
+      }
+      .notDone {
+        color: white;
+      }
+      .done {
+        color: black;
+      }
+      #doneBtn {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+      #deleteBtn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+      .red-circle {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 15px;
+        height: 15px;
+        background-color: red;
+        border-radius: 50%;
+      }
+    </style>
+
+    <!-- bootstrap - javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 나의 js 파일 -->
+  </head>
+  <body>
+    <div id="app" class="container">
+      <h1>
+        ToDo - {{todos.filter((todo) => todo.isDone ===
+        false).length}}/{{todos.length}}개 남음
+      </h1>
+      <div class="input-group">
+        <!-- input 요소에 ref를 추가하면 Vue에서 직접 참조할 수 있음. -->
+        <input
+          ref="todoInput"
+          type="text"
+          placeholder="할 일을 입력하세요"
+          class="form-control form-control-lg"
+          v-model.trim="todo"
+          @keyup.enter="addTodo"
+        />
+        <button class="btn" style="border: 1px solid black" @click="addTodo">
+          추가
+        </button>
+      </div>
+      <div class="row">
+        <div
+          class="card col-5 m-3"
+          v-for="task in todos"
+          :key="task.id"
+          :class="{'bg-secondary': task.isDone, 'bg-warning': !task.isDone}"
+        >
+          <div class="card-body" @click.stop="togglePriority(task.id)">
+            <h4 class="card-title">{{task.content}}</h4>
+            <button
+              id="doneBtn"
+              class="btn"
+              @click.stop="toggleDone(task.id)"
+              :class="{done: task.isDone, notDone: !task.isDone}"
+            >
+              {{task.isDone ? '되돌리기' : '완료'}}
+            </button>
+            <span class="red-circle" v-if="task.isPriority === true"></span>
+            <button id="deleteBtn" class="btn" @click="deleteTodo(task.id)">
+              <i class="fa-solid fa-x"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <script>
+      let ts = new Date().getTime();
+      let vm = Vue.createApp({
+        name: 'App',
+        data() {
+          return {
+            todo: '',
+            todos: [
+              { id: ts, content: '자기', isDone: false, isPriority: true },
+              { id: ts + 1, content: '놀기', isDone: true, isPriority: false },
+            ],
+          };
+        },
+        methods: {
+          addTodo() {
+            if (this.todo.length > 0) {
+              this.todos.push({
+                id: new Date().getTime(),
+                content: this.todo,
+                isDone: false,
+                isPriority: false,
+              });
+            }
+            this.todo = '';
+
+            // 새 할 일 추가 후 입력창으로 포커스 자동 이동
+            // this.$nextTick을 사용해서 DOM 업데이트 이후 실행되도록 보장함.
+            this.$nextTick(() => {
+              this.$refs.todoInput.focus(); // 입력 필드에 포커스
+            });
+          },
+          deleteTodo(id) {
+            let index = this.todos.findIndex((item) => id === item.id);
+            this.todos.splice(index, 1);
+          },
+          toggleDone(id) {
+            let index = this.todos.findIndex((item) => id === item.id);
+            this.todos[index].isDone = !this.todos[index].isDone;
+            this.todos[index].isPriority = false;
+          },
+          togglePriority(id) {
+            let index = this.todos.findIndex((item) => id === item.id);
+            if (this.todos[index].isDone === false) {
+              this.todos[index].isPriority = !this.todos[index].isPriority;
+            }
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
