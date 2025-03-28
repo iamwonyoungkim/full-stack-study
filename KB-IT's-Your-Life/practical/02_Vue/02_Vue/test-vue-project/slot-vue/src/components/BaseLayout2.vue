@@ -1,43 +1,25 @@
 <template>
-  <Header />
-  <div class="row">
-    <div class="col">
-      <SidebarNav />
+  <div class="layout">
+    <header class="header">
+      <slot name="header"></slot>
+    </header>
+    <div class="main-content">
+      <aside class="sidebar">
+        <slot name="sidebar"></slot>
+      </aside>
+      <main class="content">
+        <slot name="content"></slot>
+      </main>
     </div>
-    <div class="col">
-      <ContentCard />
-      <ContentList :items="$parent.listItems" />
-      <ContentGrid />
-    </div>
-    <div class="col">
-      <SidebarWidget />
-    </div>
+    <footer class="footer">
+      <slot name="footer"></slot>
+    </footer>
   </div>
-
-  <Footer />
 </template>
 
 <script>
-import Header from './Header.vue';
-import SidebarNav from './SidebarNav.vue';
-import SidebarWidget from './SidebarWidget.vue';
-import ContentCard from './ContentCard.vue';
-import ContentList from './ContentList.vue';
-import ContentGrid from './ContentGrid.vue';
-import Footer from './Footer.vue';
-
 export default {
   name: 'BaseLayout2',
-  components: {
-    Header,
-    SidebarNav,
-    SidebarWidget,
-    ContentCard,
-    ContentList,
-    ContentGrid,
-    Footer,
-  },
-  data() {},
 };
 </script>
 

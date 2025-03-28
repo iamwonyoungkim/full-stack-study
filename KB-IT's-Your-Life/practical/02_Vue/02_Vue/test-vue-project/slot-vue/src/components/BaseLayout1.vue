@@ -1,5 +1,6 @@
 <template>
-  <Header />
+  <!-- What I've done before -->
+  <!-- <Header />
   <div class="row">
     <div class="col">
       <SidebarNav />
@@ -11,31 +12,30 @@
       <ContentGrid />
     </div>
   </div>
+  <Footer /> -->
 
-  <Footer />
+  <!-- right way -->
+  <div class="layout">
+    <header class="header">
+      <slot name="header"></slot>
+    </header>
+    <div class="main-content">
+      <aside class="sidebar">
+        <slot name="sidebar"></slot>
+      </aside>
+      <main class="content">
+        <slot name="content"></slot>
+      </main>
+    </div>
+    <footer class="footer">
+      <slot name="footer"></slot>
+    </footer>
+  </div>
 </template>
 
 <script>
-import Header from './Header.vue';
-import SidebarNav from './SidebarNav.vue';
-import SidebarWidget from './SidebarWidget.vue';
-import ContentCard from './ContentCard.vue';
-import ContentList from './ContentList.vue';
-import ContentGrid from './ContentGrid.vue';
-import Footer from './Footer.vue';
-
 export default {
   name: 'BaseLayout1',
-  components: {
-    Header,
-    SidebarNav,
-    SidebarWidget,
-    ContentCard,
-    ContentList,
-    ContentGrid,
-    Footer,
-  },
-  data() {},
 };
 </script>
 
