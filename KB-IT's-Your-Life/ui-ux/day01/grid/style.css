@@ -1,0 +1,53 @@
+.grid-container {
+  /* 해당 요소를 Grid Container로 만든다 */
+  display: grid;
+
+  /* Grid는 열의 개수를 우선적으로 맞춘다 */
+  /* 1열의 너비: 100px, 2열의 너비: 100px 3열의 너비: 100px*/
+  grid-template-columns: 100px 100px 100px;
+  /* repeat(반복하고 싶은 횟수, 크기)를 사용할 수도 있다. */
+  /* grid-template-columns: repeat(3, 100px); */
+  /* 최소 100px을 가지고, 만약 100px을 넘으면 자동으로 늘려라 */
+  /* grid-template-rows: minmax(100px, auto) 100px; */
+  /* repeat(횟수, minmax);로도 쓸 수 있다. */
+  grid-template-rows: repeat(2, minmax(100px, auto) 100px);
+
+  /* 1행의 너비: 100px, 2행의 너비: 100px */
+  /* grid-template-rows: 100px 100px; */
+  /* 행렬의 개수를 잘 모를 때 사용 */
+  grid-auto-rows: 100px;
+
+  /* 열 사이의 간격 */
+  column-gap: 1rem;
+  /* 행 사이의 간격 */
+  row-gap: 1rem;
+
+  /* 수직 정렬: start, end, center */
+  /* align-items: start; */
+  /* 수평 정렬: start, end, center */
+  /* justify-items: start; */
+}
+.grid-item {
+  color: white;
+  background-color: #ff5252;
+}
+.grid-item:nth-child(2n) {
+  background-color: #bf5e5e;
+}
+.grid-item:nth-child(3n) {
+  background-color: green;
+}
+.grid-item:nth-child(4n) {
+  background-color: orange;
+}
+.item2 {
+  /* grid-column-start: 2;
+  grid-column-end: 4; */
+  /* 2번부터 4번 line까지 차지하겠다 */
+  /* grid-column: 2 / 4; */
+  /* 2번 line부터 2칸 차지하겠다 */
+  grid-column: 2 / span 2;
+  /* grid-row-start: 1;
+  grid-row-end: 3; */
+  grid-row: 1 / 3;
+}

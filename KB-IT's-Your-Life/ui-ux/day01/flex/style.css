@@ -1,0 +1,62 @@
+.flex-container {
+	width: 300px;
+	height: 200px;
+	background-color: #c4c4c4;
+	border: 1px solid black;
+
+	/* 기준이 되는 부모에 지정 */
+	/* main 축이 가로로 지정됨 + 요소는 차지할 수 있는 최소한의 넓이로 줄어듦 */
+	display: flex;
+
+	/* main 축의 방향 바꾸기 */
+	/* row는 가로, column은 세로 */
+	/* row-reverse는 가로(오른쪽부터), column-reverse는 세로(아래부터) */
+	flex-direction: row;
+
+	/* flex-item들을 자동 줄바꿈 할 것인지 */
+	/* wrap-reverse도 있음 */
+	flex-wrap: wrap;
+
+	/* flex-flow로 flex-direction, flex-wrap을 한 번에 쓸 수 있다. */
+	/* flex-flow: row wrap-reverse; */
+
+	/* flex-item을 주축 방향으로 정렬하는 속성 */
+	/* space-between, space-around, space-evenly */
+	justify-content: space-evenly;
+
+	/* flex-item을 교차축 방향으로 정렬하는 속성 */
+	/* stretch -> 부모 높이만큼 요소를 늘림 */
+	/* flex-start, flex-end, center */
+	/* flex-item의 height가 없을 때만 적용됨 */
+	align-items: stretch;
+
+	/* flex-wrap: wrap일 때 사용하는 속성 */
+	/* 줄 간격을 제어할 수 있다. */
+	/* center하면 중앙 배치(줄간격0) */
+	/* space-between, space-around, space-evenly, center */
+	/* align-content: space-evenly; */
+}
+
+.flex-item {
+	width: 50px;
+	color: white;
+	background-color: #ff5252;
+
+	/* 부모가 공간이 작다고 해도 너 크기를 유지해! */
+	/* 부모 container에서 삐져나갈 수 있음 */
+	flex-shrink: 0;
+}
+
+.flex-item:nth-child(2n) {
+	background-color: #bf5e5e;
+}
+
+.item1 {
+	flex-grow: 2;
+}
+.item2 {
+	flex-grow: 1;
+}
+.item3 {
+	flex-grow: 2;
+}
