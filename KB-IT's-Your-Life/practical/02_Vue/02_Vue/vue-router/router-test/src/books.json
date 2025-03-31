@@ -1,0 +1,22 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Vue.js 완벽 가이드",
+      "author": "김철수",
+      "image": "https://picsum.photos/200/300?random=1"
+    },
+    {
+      "id": 2,
+      "title": "Vue Router 마스터하기",
+      "author": "이영희",
+      "image": "https://picsum.photos/200/300?random=2"
+    },
+    {
+      "id": 3,
+      "title": "Vue와 함께하는 웹개발",
+      "author": "박지민",
+      "image": "https://picsum.photos/200/300?random=3"
+    }
+  ]
+}
