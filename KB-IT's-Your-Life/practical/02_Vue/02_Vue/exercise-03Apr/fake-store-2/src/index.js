@@ -1,0 +1,31 @@
+export default {
+  title: 'Fake Store', // 메인 타이틀
+  subtitle: 'Vue3 연습 사이트', // 서브 타이틀
+  menus: [
+    // 메인 메뉴 구성 정보
+    {
+      title: '가전',
+      url: '/electronics',
+      icon: 'fa-solid fa-tv',
+      backgroundImage: '',
+    },
+    {
+      title: '주얼리',
+      url: '/jewelry',
+      icon: 'fa-solid fa-gem',
+      backgroundImage: '',
+    },
+    {
+      title: '남성의류',
+      url: '/menclothing',
+      icon: 'fa-solid fa-user-tie',
+      backgroundImage: '',
+    },
+    {
+      title: '여성의류',
+      url: '/womenclothing',
+      icon: 'fa-solid fa-person-dress',
+      backgroundImage: '',
+    },
+  ],
+};
