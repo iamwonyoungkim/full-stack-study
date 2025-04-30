@@ -1,4 +1,4 @@
-package practical.Apr22;
+package practical.apr22;
 
 public interface ClickListener {
   void onClick();
