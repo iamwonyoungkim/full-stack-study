@@ -1,4 +1,4 @@
-package lambda;
+package practical.lambda;
 
 public class A {
   // 정적 메소드

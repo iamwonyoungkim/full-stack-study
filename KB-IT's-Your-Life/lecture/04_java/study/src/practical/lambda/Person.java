@@ -1,4 +1,4 @@
-package lambda;
+package practical.lambda;
 
 public class Person {
 

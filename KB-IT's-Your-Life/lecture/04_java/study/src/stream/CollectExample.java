@@ -1,4 +1,4 @@
-package stream.ex01;
+package stream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class CollectExample {
     maleList.stream()
         .forEach(s -> System.out.println(s.getName()));
     // 출력 방법 2
-    maleList.forEach(System.out::println); // 이렇게 하면 stream.ex01.Student@4fca772d와 같은 형태로 출력된다.
+    maleList.forEach(System.out::println); // 이렇게 하면 stream.Student@4fca772d와 같은 형태로 출력된다.
     // 출력 방법 3
     maleList.stream()
         .map(Student::getName)

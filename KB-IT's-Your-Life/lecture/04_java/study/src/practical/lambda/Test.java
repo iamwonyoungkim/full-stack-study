@@ -1,4 +1,4 @@
-package lambda;
+package practical.lambda;
 
 import java.util.function.BiFunction;
 import java.util.function.IntConsumer;
