@@ -23,14 +23,7 @@
       즉, ref나 reactive로 선언한 값이 변하면 v-if, v-for, :class 등은 다 반응해서 자동으로 동작한다.
     -->
     <div v-if="books.length > 0">
-      <div v-for="book in books" :key="book.id" class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ book.volumeInfo.title }}</h5>
-          <p class="card-text">
-            {{ book.volumeInfo.authors?.join(', ') || '저자 정보 없음' }}
-          </p>
-        </div>
-      </div>
+      <BookItem v-for="book in books" :key="book.id" :book="book" />
     </div>
 
     <p v-else-if="searched">검색 결과가 없습니다.</p>
@@ -41,6 +34,7 @@
 // ref는 반응형 변수를 만들기 위한 Composition API 함수이다.
 import { ref } from 'vue';
 import axios from 'axios';
+import BookItem from '@/components/BookItem.vue';
 
 // 아래처럼 선언하면, searchQuery는 Vue가 추적할 수 있는 반응형 변수가 된다.
 // 즉, 이 값을 바꾸면 자동으로 UI가 갱신된다.
@@ -66,8 +60,6 @@ const fetchBooks = async () => {
     );
     // A || B는 A가 false인 경우 B를 반환하고, 그렇지 않으면 A를 반환한다.
     books.value = response.data.items || [];
-    console.log(response.data);
-    console.log(response.data.items);
     searched.value = true;
   } catch (error) {
     console.error('도서 검색 중 오류 발생:', error);
