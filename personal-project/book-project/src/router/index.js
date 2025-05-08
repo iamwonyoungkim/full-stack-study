@@ -9,11 +9,11 @@ const router = createRouter({
       name: 'search',
       component: SearchPage,
     },
-    // {
-    //   path: '/favourites',
-    //   name: 'favourites',
-    //   component: () => import('../pages/FavouritesPage.vue'),
-    // },
+    {
+      path: '/favourites',
+      name: 'favourites',
+      component: () => import('../pages/FavouritesPage.vue'),
+    },
   ],
 });
 
