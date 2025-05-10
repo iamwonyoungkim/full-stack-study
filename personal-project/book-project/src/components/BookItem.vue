@@ -2,9 +2,9 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">{{ book.volumeInfo.title }}</h5>
-      <p class="card-text">
-        {{ book.volumeInfo.authors?.join(', ') || '저자 정보 없음' }}
-      </p>
+      <router-link :to="`/book/${book.id}`" class="btn btn-outline-primary me-3"
+        >상세 보기</router-link
+      >
       <button
         class="btn"
         :class="isFav ? 'btn-danger' : 'btn-outline-primary'"
