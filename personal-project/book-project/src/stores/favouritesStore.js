@@ -1,30 +1,55 @@
 import { defineStore } from 'pinia';
+import { ref, watch } from 'vue';
 
-export const useFavouritesStore = defineStore('favourites', {
-  // state는 공유할 데이터이다.
-  state: () => ({
-    favourites: [],
-  }),
-  // actions는 해당 데이터를 다루는 함수들이다.
-  actions: {
-    addFavourite(book) {
-      // prevent duplication
-      if (!this.favourites.find((item) => item.id === book.id)) {
-        this.favourites.push(book);
-      }
+export const useFavouritesStore = defineStore('favourites', () => {
+  const favourites = ref([]);
+
+  // ✅ 앱이 시작할 때 로컬스토리지에서 데이터 불러오기
+  const stored = localStorage.getItem('favourites'); // 가져오는 값은 항상 String이다.
+  if (stored) {
+    try {
+      // JSON.parse()는 문자열로 된 JSON 데이터를 다시 JavaScript 객체로 변환하는 함수이다.
+      favourites.value = JSON.parse(stored);
+    } catch (e) {
+      console.error('로컬스토리지 파싱 실패:', e);
+    }
+  }
+
+  // ✅ 즐겨찾기 추가
+  function addFavourite(book) {
+    if (!isFavourite(book.id)) {
+      favourites.value.push(book);
+    }
+  }
+
+  // ✅ 즐겨찾기 제거
+  function removeFavourite(bookId) {
+    favourites.value = favourites.value.filter((book) => book.id !== bookId);
+  }
+
+  // ✅ 특정 도서가 즐겨찾기 상태인지 확인
+  function isFavourite(bookId) {
+    return favourites.value.some((book) => book.id === bookId);
+  }
+
+  // ✅ 자동 저장: favorites가 바뀔 때마다 localStorage에 저장
+  // watch는 reactive 데이터가 변경될 때마다 특정 콜백 함수를 실행하게 만들어주는 감시자이다.
+  // 여기서는 favourites가 변경되면
+  watch(
+    favourites,
+    (newVal) => {
+      // JSON.stringify()는 JavaScript 객체를 JSON 문자열로 변환하는 함수이다.
+      // 여기서는 배열을 JSON 문자열로 변환하여 localStorage에 저장한다.
+      // localStorage.setItem()은 로컬 스토리지에 데이터를 저장하는 메서드이다.
+      localStorage.setItem('favourites', JSON.stringify(newVal));
     },
-    removeFavourite(bookId) {
-      this.favourites = this.favourites.filter((item) => item.id !== bookId);
-    },
-    // some은 JS의 배열 메서드로, '배열 안에 특정 조건을 만족하는 요소가 하나라도 있는가?'를 판단하는 함수이다.
-    /*
-    array.some(callback)의 형태
-        - callback은 배열의 각 요소에 대해 실행되는 함수
-        - true를 반환하는 요소가 하나라도 있으면 some()은 즉시 true를 반환
-        - 전부 통과 못 하면 false 반환
-    */
-    isFavourite(bookId) {
-      return this.favourites.some((item) => item.id === bookId);
-    },
-  },
+    { deep: true } // 객체나 배열 같은 중첩된 구조 내부까지도 감시하게 만드는 옵션이다.
+  );
+
+  return {
+    favourites,
+    addFavourite,
+    removeFavourite,
+    isFavourite,
+  };
 });
