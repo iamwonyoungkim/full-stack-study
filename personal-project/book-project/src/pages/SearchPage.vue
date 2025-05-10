@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h1>📚 도서 검색</h1>
+    <p class="text-muted float-end" style="font-size: 0.8rem">
+      검색 결과를 초기화하려면 새로고침을 해주세요.
+    </p>
     <div class="input-group">
       <!-- 
         v-model은 input과 데이터(state)를 양방향으로 연결해주는 디렉티브이다.
@@ -9,7 +12,7 @@
         (양방향 바인딩(two-way binding))
       -->
       <input
-        v-model="searchQuery"
+        v-model="searchStore.keyword"
         type="text"
         class="form-control"
         placeholder="도서 제목을 입력하세요."
@@ -22,11 +25,15 @@
       reactive 변수의 값이 변경되면, Vue가 자동으로 DOM을 다시 렌더링한다.
       즉, ref나 reactive로 선언한 값이 변하면 v-if, v-for, :class 등은 다 반응해서 자동으로 동작한다.
     -->
-    <div v-if="books.length > 0">
-      <BookItem v-for="book in books" :key="book.id" :book="book" />
+    <div v-if="loading">검색 중...</div>
+    <div v-else-if="error">{{ error }}</div>
+    <div v-else>
+      <BookItem
+        v-for="book in searchStore.results"
+        :key="book.id"
+        :book="book"
+      />
     </div>
-
-    <p v-else-if="searched">검색 결과가 없습니다.</p>
   </div>
 </template>
 
@@ -35,19 +42,26 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import BookItem from '@/components/BookItem.vue';
+import { useSearchStore } from '@/stores/searchStore';
+
+const searchStore = useSearchStore();
+
+const loading = ref(false);
+const error = ref('');
 
 // 아래처럼 선언하면, searchQuery는 Vue가 추적할 수 있는 반응형 변수가 된다.
 // 즉, 이 값을 바꾸면 자동으로 UI가 갱신된다.
 // 주의할 점!
 // - ref로 만든 변수는 .value로 접근해야 된다. e.g. searchQuery.value = 'javascript'
 // - 하지만 <template> 안에서 사용할 땐 .value를 생략할 수 있다. e.g. {{ searchQuery }}
-const searchQuery = ref('');
-const books = ref([]);
-const searched = ref(false);
+// const searchQuery = ref('');
 
 const fetchBooks = async () => {
   // if searchQuery is empty, then return nothing
-  if (!searchQuery.value.trim()) return;
+  if (!searchStore.keyword.trim()) return;
+
+  loading.value = true;
+  error.value = '';
 
   // 사용자가 입력한 키워드를 가지고 Google Books API에 axios로 요청 보낸다.
   // encodeURIComponent()는 URL에 포함될 수 없는 문자(공백, 한글 등)를 안전하게 변환해주는 함수이다.
@@ -55,14 +69,19 @@ const fetchBooks = async () => {
   try {
     const response = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-        searchQuery.value
+        searchStore.keyword
       )}`
     );
     // A || B는 A가 false인 경우 B를 반환하고, 그렇지 않으면 A를 반환한다.
-    books.value = response.data.items || [];
-    searched.value = true;
-  } catch (error) {
-    console.error('도서 검색 중 오류 발생:', error);
+    // books.value = response.data.items || [];
+    // searched.value = true;
+    // 위의 2줄 대신 Pinia의 searchStore 사용
+    searchStore.setResults(response.data.items || []);
+  } catch (e) {
+    error.value = '도서 검색 중 오류가 발생했습니다.';
+    console.error(e);
+  } finally {
+    loading.value = false;
   }
 };
 </script>
