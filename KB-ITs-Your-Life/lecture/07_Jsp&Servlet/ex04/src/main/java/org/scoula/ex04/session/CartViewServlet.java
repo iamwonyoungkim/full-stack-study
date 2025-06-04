@@ -35,4 +35,8 @@ public class CartViewServlet extends HttpServlet {
         out.print("</body></html>");
 
     }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }

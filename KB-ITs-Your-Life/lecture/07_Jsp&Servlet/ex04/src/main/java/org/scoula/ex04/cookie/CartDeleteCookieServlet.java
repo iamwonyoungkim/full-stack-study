@@ -30,4 +30,9 @@ public class CartDeleteCookieServlet extends HttpServlet {
         out.print("<a href='cookie_product.jsp'>상품 선택 페이지</a><br>");
         out.print("</body></html>");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }
