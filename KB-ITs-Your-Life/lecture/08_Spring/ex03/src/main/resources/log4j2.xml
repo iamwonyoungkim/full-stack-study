@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <!-- Appender, Layout 설정 -->
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern=" %-5level %c(%M:%L) - %m%n"/>
+        </Console>
+    </Appenders>
+
+    <!-- Logger 설정 -->
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="console"/>
+        </Root>
+
+        <Logger name="_org.springframework.web.servlet.HandlerMapping.Mappings" level="DEBUG" additivity="false" >
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.scoula" level="INFO" additivity="false" >
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+    </Loggers>
+
+</Configuration>
+
+<!--
+    로그 레벨
+     FATAL : 가장 크리티컬한 에러가 일어 났을 때만 로깅
+     ERROR : 일반 에러가 일어 났을 때만 로깅
+     WARN : 에러는 아니지만 주의할 필요가 있을 때만 로깅
+     INFO : 일반 정보를 나타낼 때 로깅 (INFO + ERROR)
+     DEBUG : 일반 정보를 상세히 나타낼 때 로깅 (디버깅 정보)
+     TRACE : 경로추적을 위해 사용
+-->
