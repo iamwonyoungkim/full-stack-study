@@ -24,6 +24,14 @@
         <result property="bookId" column="book_id" />
     </resultMap>
 
+    <select id="getAllBooks" resultMap="BookMap">
+        SELECT b.book_id, b.title, bd.isbn, bd.publisher, r.review_id, r.content, r.rating
+        FROM book b
+                 LEFT JOIN book_detail bd
+                           ON b.book_id = bd.book_id
+                 LEFT JOIN review r
+                           ON b.book_id = r.book_id
+    </select>
 
     <select id="getBookWithDetail" resultMap="BookMap">
         SELECT b.book_id, b.title, bd.isbn, bd.publisher

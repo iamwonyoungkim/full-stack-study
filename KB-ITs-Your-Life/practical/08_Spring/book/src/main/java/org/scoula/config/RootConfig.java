@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 // 일반 설정. 어디에서든지 써먹을 설정들
 @Configuration
 @PropertySource({"classpath:/application.properties"})
-@ComponentScan(basePackages = {"org.scoula.controller"})
+@ComponentScan(basePackages = {"org.scoula"})
 @MapperScan(basePackages = {"org.scoula.mapper"})
 @EnableTransactionManagement
 public class RootConfig {

@@ -1,24 +1,26 @@
 <%--
   Created by IntelliJ IDEA.
   User: Home
-  Date: 2025-06-09
-  Time: 오전 11:14
+  Date: 2025-06-18
+  Time: 오후 4:51
   To change this template use File | Settings | File Templates.
 --%>
-<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<html lang="ko">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <title>Title</title>
 </head>
 <body>
-<h3>환영합니다.</h3>
-<a href="books/">모든 책 정보</a>
-<a href="books/1/detail">책 디테일</a>
-<a href="books/1/reviews">책 리뷰</a>
-<a href="books/1">책 디테일 리뷰</a>
+책 제목: ${book.title}<br>
+리뷰 목록<br>
+<c:forEach var="review" items="${book.reviews}">
+    ${review.reviewId}번 리뷰
+    <ul>
+        <li>content: ${review.content}</li>
+        <li>rating: ${review.rating}</li>
+    </ul>
+</c:forEach>
 </body>
 </html>
