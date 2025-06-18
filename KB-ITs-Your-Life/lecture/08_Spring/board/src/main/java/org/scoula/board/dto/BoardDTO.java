@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.domain.BoardVO;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +24,11 @@ public class BoardDTO {
     private Date regDate;
     private Date updateDate;
 
+    // 첨부 파일
+    private List<BoardAttachmentVO> attaches;
+
+    List<MultipartFile> files = new ArrayList<>(); // 실제 업로드된 파일(Multipart) 목록
+
     // VO -> DTO 변환
     // new BoardDTO(...) 처럼 생성자를 직접 쓰는 대신,
     // 직관적이고 목적이 드러나는 방식으로 객체를 생성할 수 있게 해준다.
@@ -29,6 +38,7 @@ public class BoardDTO {
                 .title(vo.getTitle())
                 .content(vo.getContent())
                 .writer(vo.getWriter())
+                .attaches(vo.getAttaches())
                 .regDate(vo.getRegDate())
                 .updateDate(vo.getUpdateDate())
                 .build();
@@ -41,6 +51,7 @@ public class BoardDTO {
                 .title(title)
                 .content(content)
                 .writer(writer)
+                .attaches(attaches)
                 .regDate(regDate)
                 .updateDate(updateDate)
                 .build();
