@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.scoula.mapper.BookMapper">
+    <resultMap id="BookMap" type="BookVO">
+        <id property="bookId" column="book_id"/>
+        <result property="title" column="title"/>
+        <association property="bookDetail" resultMap="BookDetailMap"/>
+        <collection property="reviews" resultMap="ReviewMap"/>
+    </resultMap>
+
+    <resultMap id="BookDetailMap" type="BookDetailVO">
+        <id property="bookId" column="book_id"/>
+        <result property="isbn" column="isbn" />
+        <result property="publisher" column="publisher" />
+    </resultMap>
+
+    <resultMap id="ReviewMap" type="ReviewVO">
+        <id property="reviewId" column="review_id"/>
+        <result property="content" column="content" />
+        <result property="rating" column="rating" />
+        <result property="bookId" column="book_id" />
+    </resultMap>
+
+
+    <select id="getBookWithDetail" resultMap="BookMap">
+        SELECT b.book_id, b.title, bd.isbn, bd.publisher
+        FROM book as b
+            LEFT JOIN book_detail as bd
+                ON b.book_id = bd.book_id
+        WHERE b.book_id = #{bookId}
+    </select>
+    <select id="getBookWithReviews" resultMap="BookMap">
+        SELECT b.book_id, b.title, r.review_id, r.content, r.rating
+        FROM book as b
+             LEFT JOIN review as r
+                ON b.book_id = r.book_id
+        WHERE b.book_id = #{bookId}
+    </select>
+    <select id="getBookWithDetailAndReviews" resultMap="BookMap">
+        SELECT b.book_id, b.title, bd.isbn, bd.publisher, r.review_id, r.content, r.rating
+        FROM book b
+            LEFT JOIN book_detail bd
+                ON b.book_id = bd.book_id
+            LEFT JOIN review r
+                ON b.book_id = r.book_id
+        WHERE b.book_id = #{bookId}
+    </select>
+</mapper>
