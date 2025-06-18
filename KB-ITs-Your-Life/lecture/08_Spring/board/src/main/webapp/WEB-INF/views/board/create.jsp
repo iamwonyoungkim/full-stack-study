@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <%@include file="../layouts/header.jsp"%>
 <h1 class="page-header my-4"><i class="far fa-edit"></i> 새 글쓰기</h1>
-<div >
+<div>
   <form method="post" enctype="multipart/form-data">
     <div>
       <label>제목</label>

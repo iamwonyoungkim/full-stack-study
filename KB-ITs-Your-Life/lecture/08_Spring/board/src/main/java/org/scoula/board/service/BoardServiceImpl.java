@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -37,8 +38,13 @@ public class BoardServiceImpl implements BoardService {
     public BoardDTO get(Long no) {
         log.info("get......" + no);
 
+        BoardVO boardVO = mapper.get(no);
+        List<BoardAttachmentVO> attaches = mapper.getAttachmentList(no);
+
         // mapper.get(no);의 return값은 BoardVO 타입으로, VO -> DTO 변환이 필요하다.
         BoardDTO board = BoardDTO.of(mapper.get(no));
+
+        board.setAttaches(attaches);
         return Optional.ofNullable(board)
                 .orElseThrow(NoSuchElementException::new); // null이면 NoSuchElementException 발생
     }
@@ -53,24 +59,35 @@ public class BoardServiceImpl implements BoardService {
         BoardVO boardVO = board.toVO(); // DTO -> VO 변환
         mapper.create(boardVO);         // DB insert (insert 후 PK 생성됨)
 
+        board.setNo(boardVO.getNo());
+
         // 파일 업로드 처리
         List<MultipartFile> files = board.getFiles();
         if(files != null && !files.isEmpty()) { // 첨부 파일이 있는 경우
-            upload(boardVO.getNo(), files);
+            List<BoardAttachmentVO> attaches = upload(boardVO.getNo(), files);  // ← 리스트 받아옴
+            board.setAttaches(attaches);  // ← DTO에 설정
         }
     }
 
-    private void upload(Long bno, List<MultipartFile> files) {
+    private List<BoardAttachmentVO> upload(Long bno, List<MultipartFile> files) {
+        List<BoardAttachmentVO> list = new ArrayList<>();
+
         for(MultipartFile part: files) {
             if(part.isEmpty()) continue;
             try {
                 String uploadPath = UploadFiles.upload(BASE_DIR, part);
+
                 BoardAttachmentVO attach = BoardAttachmentVO.of(part, bno, uploadPath);
                 mapper.createAttachment(attach);
+
+                list.add(attach);
+
             } catch (IOException e) {
                 throw new RuntimeException(e); // @Transactional에서 감지, 자동 rollback
             }
         }
+
+        return list;
     }
 
     @Override

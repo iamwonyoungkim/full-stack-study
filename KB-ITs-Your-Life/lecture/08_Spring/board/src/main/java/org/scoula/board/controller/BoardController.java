@@ -2,14 +2,18 @@ package org.scoula.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.dto.BoardDTO;
 import org.scoula.board.service.BoardService;
+import org.scoula.common.util.UploadFiles;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.util.List;
 
 @Log4j2
 @Controller
@@ -31,12 +35,15 @@ public class BoardController {
         log.info("create");
     }
     @PostMapping("/create")
-    public String create(BoardDTO board) {
+    public String create(BoardDTO board, @RequestParam("files")List<MultipartFile> files) {
         log.info("create" + board);
+
+        // MultipartFile을 DTO에 직접 넣어주기 (자동 주입되지 않음)
+        board.setFiles(files);
 
         service.create(board);
 
-        return "redirect:/board/list";
+        return "redirect:/board/get?no=" + board.getNo();
     }
 
     // 글 상세 보기(조회)
@@ -66,5 +73,14 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    @GetMapping("/download/{no}")
+    @ResponseBody
+    public void download(@PathVariable("no") Long no, HttpServletResponse response) throws Exception {
+        BoardAttachmentVO attach = service.getAttachment(no);
+
+        File file = new File(attach.getPath());
+
+        UploadFiles.download(response, file, attach.getFilename());
+    }
 
 }
