@@ -3,23 +3,24 @@ const stompClient = new StompJs.Client({
     brokerURL: 'ws://localhost:8080/chat-app'
 });
 
-// 웹 소켓 에러 발생시 콜백
+// 웹 소켓 에러 발생시 콜백 (onWebSocketError)
 stompClient.onWebSocketError = (error) => {
     console.error('Error with websocket', error);
 };
 
-// Stomp 에러 발생시 콜백
+// Stomp 에러 발생시 콜백 (onStompError)
 stompClient.onStompError = (frame) => {
     console.error('Broker reported error: ' + frame.headers['message']);
     console.error('Additional details: ' + frame.body);
 };
 
-// 연결 성공 시 콜백
+// 연결 성공 시 콜백 (onConnect)
 // 구독 토픽 등록
 stompClient.onConnect = (frame) => {
     console.log(frame)
     setConnected(true);
-    // 구독 토픽 등록 및 수신 처리 핸들러 등록
+
+    // 구독 토픽 등록 및 수신 처리 핸들러 등록 (.subscribe(구독 토픽 문자열, 수신 핸들러 함수)
     // 토픽 문자열: '/topic/greetings' - 입장 메시지
     stompClient.subscribe('/topic/greetings', (greeting) =>
     {
@@ -32,7 +33,8 @@ stompClient.onConnect = (frame) => {
         const message = JSON.parse(chat.body);
         showMessage(`${message.name}:${message.content}`);
     });
-    // 연결 성공 시 입장 메시지 보내기
+
+    // 연결 성공 시 입장 메시지 보내기 (.publish({ destination: 토픽 문자열, body: 전송할 메시지 }))
     const name = document.getElementById('name').value;
     stompClient.publish({
         destination: '/app/hello',
@@ -51,19 +53,19 @@ function setConnected(connected) {
     messages.innerHTML = '';
 }
 
-// 연결하기
+// 연결하기 (.activate())
 function connect() {
     stompClient.activate();
 }
 
-// 연결 끊기
+// 연결 끊기 (.deactivate())
 function disconnect() {
     stompClient.deactivate();
     setConnected(false);
     console.log('Disconnected');
 }
 
-// 메시지 전송하기
+// 메시지 전송하기 (.publish({ destination: 토픽 문자열, body: 전송할 메시지 }))
 function sendMessage() {
     const name = document.getElementById('name').value;
     const content = document.getElementById('content').value;
@@ -90,6 +92,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     connectBtn.addEventListener('click', () => connect());
     disconnectBtn.addEventListener('click', () => disconnect());
     sendBtn.addEventListener('click', () => sendMessage());
+    
     for(const form of forms) {
         console.log(form)
         form.addEventListener('submit', (e) => e.preventDefault());

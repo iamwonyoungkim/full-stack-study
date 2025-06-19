@@ -17,7 +17,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat-app") // 접속 엔드포인트, ws://localhost:8080/chat-app
+        registry.addEndpoint("/chat-app") // 접속 엔드포인트(클라이언트가 접속할 때 사용할 url 경로, 브로커 url), ws://localhost:8080/chat-app
                 .setAllowedOrigins("*"); // CORS 허용 (CORS: 웹 브라우저에서 다른 출처의 리소스에 접근할 수 있도록 허용하는 메커니즘)
     }
 }

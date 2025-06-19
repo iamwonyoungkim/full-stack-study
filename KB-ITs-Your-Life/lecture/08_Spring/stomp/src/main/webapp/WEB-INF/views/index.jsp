@@ -36,6 +36,7 @@
         </div>
       </form>
     </div>
+
     <div class="col-md-6">
       <form class="form-inline">
         <div class="form-group">
@@ -52,16 +53,10 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th>
-            채
-            팅
-            메
-            시
-            지</th>
+          <th>채팅메시지</th>
         </tr>
         </thead>
-        <tbody id="chat-messages"
-        >
+        <tbody id="chat-messages">
         </tbody>
       </table>
     </div>
