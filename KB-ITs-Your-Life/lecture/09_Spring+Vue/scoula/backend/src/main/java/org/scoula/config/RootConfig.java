@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource({"classpath:/application.properties"})
 @ComponentScan(basePackages = {"org.scoula"})
-@MapperScan(basePackages = {"org.scoula.board.mapper"})
+@MapperScan(basePackages = {"org.scoula.board.mapper", "org.scoula.member.mapper"})
 @Log4j2
 @EnableTransactionManagement
 public class RootConfig {
