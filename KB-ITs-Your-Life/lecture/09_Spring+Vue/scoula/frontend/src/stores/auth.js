@@ -57,14 +57,36 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  const changeProfile = (member) => {
+    state.value.user.email = member.email;
+    localStorage.setItem('auth', JSON.stringify(state.value));
+  };
+
+  const avatarRand = ref(Math.floor(Math.random() * 10000));
+
+  function updateAvatarRand() {
+    avatarRand.value = Math.floor(Math.random() * 10000);
+  }
+
   load(); // 기동 시
 
   // 무엇을 리턴할 거냐가 중요!!
-  return { state, username, email, isLogin, login, logout, getToken };
+  return {
+    state,
+    username,
+    email,
+    isLogin,
+    avatarRand,
+    updateAvatarRand,
+    changeProfile,
+    login,
+    logout,
+    getToken,
+  };
   /*
   - state: 상태 객체 // 비권장(다른 곳에서 수정할 수 있기 때문에)
   - 나머지: 권장
     - username, email, isLogin: 읽기 전용 속성
-    - login, logout, getToken: 메서드 (이 메서드들을 통해서 수정할 수 있음)
+    - changeProfile, login, logout, getToken: 메서드 (이 메서드들을 통해서 수정할 수 있음)
   */
 });
