@@ -14,7 +14,7 @@ const articles = computed(() => page.value.list); // 실제 게시글의 목록
 
 const pageRequest = reactive({
   page: parseInt(cr.query.page) || 1,
-  amount: parseInt(cr.query.amount) || 10,
+  amount: parseInt(cr.query.amount) || 2,
 });
 
 // 페이지네이션 페이지 변경
@@ -84,7 +84,7 @@ load(pageRequest);
         <vue-awesome-paginate
           :total-items="page.totalCount"
           :items-per-page="pageRequest.amount"
-          :max-pages-shown="5"
+          :max-pages-shown="3"
           :show-ending-buttons="true"
           v-model="pageRequest.page"
           @click="handlePageChange"

@@ -12,7 +12,7 @@ public class PageRequest {
 
     public PageRequest() {
         page = 1;
-        amount = 10;
+        amount = 2;
     }
 
     public static PageRequest of(int page, int amount) {

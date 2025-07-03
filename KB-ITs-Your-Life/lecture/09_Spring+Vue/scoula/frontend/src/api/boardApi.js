@@ -1,6 +1,7 @@
 import api from '@/api';
 
 const BASE_URL = '/api/board';
+const headers = { 'Content-Type': 'multipart/form-data' };
 
 export default {
   async getList(params) {
