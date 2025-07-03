@@ -123,6 +123,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
 //                .antMatchers(HttpMethod.POST, "/api/member").authenticated() // 잘못 들어감. 회원가입은 인증이 필요없다
                 .antMatchers(HttpMethod.PUT, "/api/member", "/api/member/*/changepassword").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/board/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/board/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/api/board/**").authenticated()
                 .anyRequest().permitAll(); // 나머지는 로그인 된 경우 모두 허용
 
         http.httpBasic().disable() // 기본 HTTP 인증 비활성화

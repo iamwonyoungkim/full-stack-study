@@ -38,15 +38,25 @@ public class BoardServiceImpl implements BoardService {
     public BoardDTO get(Long no) {
         log.info("get......" + no);
 
-        BoardVO boardVO = mapper.get(no);
-        List<BoardAttachmentVO> attaches = mapper.getAttachmentList(no);
-
         // mapper.get(no);의 return값은 BoardVO 타입으로, VO -> DTO 변환이 필요하다.
         BoardDTO board = BoardDTO.of(mapper.get(no));
 
-        board.setAttaches(attaches);
+        log.info("========================" + board);
         return Optional.ofNullable(board)
                 .orElseThrow(NoSuchElementException::new); // null이면 NoSuchElementException 발생
+    }
+
+    private void upload(Long bno, List<MultipartFile> files) {
+        for(MultipartFile part: files) {
+            if(part.isEmpty()) continue;
+            try {
+                String uploadPath = UploadFiles.upload(BASE_DIR, part); // 실제 업로드 처리
+                BoardAttachmentVO attach = BoardAttachmentVO.of(part, bno, uploadPath);
+                mapper.createAttachment(attach);
+            } catch (IOException e) {
+                throw new RuntimeException(e); // @Transactional에서 감지, 자동 rollback
+            }
+        }
     }
 
     // 2개 이상의 insert 문이 실행될 수 있으므로 트랜잭션 처리 필요
@@ -59,43 +69,29 @@ public class BoardServiceImpl implements BoardService {
         BoardVO boardVO = board.toVO(); // DTO -> VO 변환
         mapper.create(boardVO);         // DB insert (insert 후 PK 생성됨)
 
-        board.setNo(boardVO.getNo());
-
         // 파일 업로드 처리
         List<MultipartFile> files = board.getFiles();
         if(files != null && !files.isEmpty()) { // 첨부 파일이 있는 경우
-            List<BoardAttachmentVO> attaches = upload(boardVO.getNo(), files);  // ← 리스트 받아옴
-            board.setAttaches(attaches);  // ← DTO에 설정
+            upload(boardVO.getNo(), files);
         }
-
         return get(boardVO.getNo());
     }
 
-    private List<BoardAttachmentVO> upload(Long bno, List<MultipartFile> files) {
-        List<BoardAttachmentVO> list = new ArrayList<>();
 
-        for(MultipartFile part: files) {
-            if(part.isEmpty()) continue;
-            try {
-                String uploadPath = UploadFiles.upload(BASE_DIR, part);
-
-                BoardAttachmentVO attach = BoardAttachmentVO.of(part, bno, uploadPath);
-                mapper.createAttachment(attach);
-
-                list.add(attach);
-
-            } catch (IOException e) {
-                throw new RuntimeException(e); // @Transactional에서 감지, 자동 rollback
-            }
-        }
-
-        return list;
-    }
 
     @Override
     public BoardDTO update(BoardDTO board) {
         log.info("update......" + board);
-        mapper.update(board.toVO());
+        BoardVO boardVO = board.toVO();
+        log.info("update......" + boardVO);
+
+        mapper.update(boardVO);
+
+        // 파일 업로드 처리
+        List<MultipartFile> files = board.getFiles();
+        if(files != null && !files.isEmpty()) {
+            upload(boardVO.getNo(), files);
+        }
 
         return get(board.getNo());
     }
@@ -105,7 +101,7 @@ public class BoardServiceImpl implements BoardService {
         log.info("delete......." + no);
         BoardDTO board = get(no);
 
-        mapper.delete(no);
+        mapper.delete(no); // CASCADE 설정
         return board;
     }
 

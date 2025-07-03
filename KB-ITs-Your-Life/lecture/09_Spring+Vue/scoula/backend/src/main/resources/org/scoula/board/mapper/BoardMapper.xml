@@ -23,6 +23,7 @@
             update_date = now()
         where no = #{no}
     </update>
+
     <delete id="delete">
         delete from tbl_board where no = #{no}
     </delete>
@@ -46,8 +47,13 @@
     </select>
 
     <!-- get(select) 처리 -->
-    <select id="get" resultType="BoardVO">
-        select * from tbl_board where no = #{no}
+    <select id="get" resultMap="boardMap">
+        select b.*, a.no as ano, a.bno, a.filename, a.path, a.content_type, a.size, a.reg_date a_reg_date
+        FROM tbl_board b
+            LEFT OUTER JOIN tbl_board_attachment a
+            ON b.no = a.bno
+        WHERE b.no = #{no}
+        ORDER BY filename
     </select>
 
     <insert id="createAttachment">
@@ -55,13 +61,13 @@
         values (#{filename}, #{path}, #{contentType}, #{size}, #{bno})
     </insert>
 
-    <select id="getAttachmentList" resultType="org.scoula.board.domain.BoardAttachmentVO">
+    <select id="getAttachmentList" resultType="BoardAttachmentVO">
         select * from tbl_board_attachment
         where bno = #{bno}
         order by filename
     </select>
 
-    <select id="getAttachment" resultType="org.scoula.board.domain.BoardAttachmentVO">
+    <select id="getAttachment" resultType="BoardAttachmentVO">
         select * from tbl_board_attachment
         where no = #{no}
     </select>
