@@ -14,17 +14,17 @@ const no = cr.params.no; // route parameter 추출
 const article = ref({});
 
 const back = () => {
-  router.push({ name: 'board/list' });
+  router.push({ name: 'board/list', query: cr.query });
 };
 
 const update = () => {
-  router.push({ name: 'board/update', params: { no: no } });
+  router.push({ name: 'board/update', params: { no: no }, query: cr.query });
 };
 
 const remove = async () => {
   if (!confirm('삭제할까요?')) return;
   await api.delete(no);
-  router.push({ name: 'board/list' }); // 삭제 성공 후 목록 보기로 이동
+  router.push({ name: 'board/list', query: cr.query }); // 삭제 성공 후 목록 보기로 이동
 };
 
 const download = async (no) => {
