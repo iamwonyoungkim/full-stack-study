@@ -72,6 +72,16 @@
         where no = #{no}
     </select>
 
+    <select id="getTotalCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM tbl_board
+    </select>
+
+    <select id="getPage" resultType="BoardVO">
+        SELECT * FROM tbl_board ORDER BY no DESC
+        LIMIT #{offset}, #{amount}
+        # limit에 수식이 올 수는 없다. 미리 계산을 해두고 넣어야 한다.
+    </select>
+
     <delete id="deleteAttachment">
         delete from tbl_board_attachment
         where no = #{no}
