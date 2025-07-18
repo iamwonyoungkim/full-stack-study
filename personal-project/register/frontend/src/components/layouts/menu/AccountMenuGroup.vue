@@ -1,0 +1,34 @@
+<script setup>
+import { computed } from 'vue';
+import MenuItem from './MenuItem.vue';
+import AccountMenuItem from './AccountMenuItem.vue';
+import LogoutMenuItem from './LogoutMenuItem.vue';
+import config from '@/config';
+
+// // 분해 할당
+// const { login, join } = config.accountMenus;
+
+// const islogin = computed(() => false); // 임시: 로그인하지 않음
+// const username = computed(() => ''); // 임시: 사용자명 없음
+
+const { login, join } = config.accountMenus;
+import { useAuthStore } from '@/stores/auth.js';
+
+const auth = useAuthStore();
+
+const islogin = computed(() => auth.isLogin);
+const username = computed(() => auth.username);
+</script>
+
+<template>
+  <ul class="navbar-nav ms-auto">
+    <template v-if="islogin">
+      <AccountMenuItem :username="username" />
+      <LogoutMenuItem />
+    </template>
+    <template v-else>
+      <MenuItem :menu="login" />
+      <MenuItem :menu="join" />
+    </template>
+  </ul>
+</template>

@@ -1,0 +1,1 @@
+import{s as e,b as c,o as r}from"./index-B1M5SUhq.js";const t={};function n(o,s){return r(),c("h1",null,"첫 번째 페이지")}const l=e(t,[["render",n]]);export{l as default};
